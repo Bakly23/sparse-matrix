@@ -91,6 +91,8 @@ public class SparseMatrix {
                 }
             }
         }
+        // storing elements in hashmap and sorting values later is faster then storing values in treemap and returning
+        // its values as result
         List<MatrixElement> result = new ArrayList<>(rowValues.values());
         Collections.sort(result);
         return result;
