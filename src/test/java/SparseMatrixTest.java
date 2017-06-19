@@ -62,12 +62,9 @@ public class SparseMatrixTest {
         Spliterator<Integer> spliterator2 = spliterator.trySplit();
         Spliterator<Integer> spliterator3 = spliterator2.trySplit();
         Spliterator<Integer> spliterator4 = spliterator3.trySplit();
-        int numberOfNotNullElements = Stream.of(
-                StreamSupport.stream(spliterator, true),
-                StreamSupport.stream(spliterator2, false),
-                StreamSupport.stream(spliterator3, true),
-                StreamSupport.stream(spliterator4, true))
-                .flatMap(stream -> stream)
+        int numberOfNotNullElements = Stream.concat(
+                Stream.concat(StreamSupport.stream(spliterator, true), StreamSupport.stream(spliterator2, true)),
+                Stream.concat(StreamSupport.stream(spliterator3, true), StreamSupport.stream(spliterator4, true)))
                 .filter(i -> i != 0)
                 .mapToInt(i -> i > 0 ? 1 : 0)
                 .reduce(0, (i1, i2) -> i1 + i2);
