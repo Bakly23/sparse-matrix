@@ -1,3 +1,4 @@
+import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import org.junit.Test;
 
 import java.util.stream.Stream;
@@ -15,6 +16,17 @@ public class SparseMatrixSupportImplTest {
         assertEquals(5, sparseMatrix.getValue(0, 0));
         assertEquals(0, sparseMatrix.getValue(1, 0));
         assertEquals(2, sparseMatrix.getValue(1, 2));
+        System.out.println(ObjectSizeCalculator.getObjectSize(sparseMatrix));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFromStreamEmpty() {
+        Stream<Integer> stream = Stream.of(0, 0);
+        SparseMatrix sparseMatrix = new SparseMatrix(stream);
+        System.out.println(ObjectSizeCalculator.getObjectSize(sparseMatrix));
+        assertEquals(0, sparseMatrix.getNumberOfRows());
+        assertEquals(0, sparseMatrix.getNumberOfColumns());
+        sparseMatrix.getValue(0, 0);
     }
 
     @Test

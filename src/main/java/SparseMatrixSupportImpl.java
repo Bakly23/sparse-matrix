@@ -44,7 +44,7 @@ public class SparseMatrixSupportImpl implements SparseMatrixSupport<SparseMatrix
     //multipling of matrix is parallel
     public SparseMatrix multiply(SparseMatrix first, SparseMatrix second) {
         if (first.getNumberOfColumns() != second.getNumberOfRows()) {
-            throw new RuntimeException("Number of columns of the first matrix must be equal to number of rows of the second.");
+            throw new IllegalArgumentException("Number of columns of the first matrix must be equal to number of rows of the second.");
         }
 
         LOGGER.info("Calculation of resulting multiply matrix has been started.");

@@ -179,7 +179,9 @@ public class SparseMatrix {
         }
 
         private void fillLastRow() {
-            tmpIArray[currentRow + 1] = tmpIArray[currentRow] + numberOfNotNullElementsInCurrentRow;
+            if (numberOfRows > 0) {
+                tmpIArray[currentRow + 1] = tmpIArray[currentRow] + numberOfNotNullElementsInCurrentRow;
+            }
         }
 
         private void putMatrixElementIntoMatrix(Integer value) {
