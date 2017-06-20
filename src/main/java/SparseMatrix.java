@@ -202,9 +202,6 @@ public class SparseMatrix {
         }
 
         private void assureCapacity() {
-            /*if(tmpIArray == null) {
-                tmpIArray = new int[numberOfRows + 1];
-            }*/
             if (indexOfTriplet + 1 == tmpValues.length) {
                 int newSize = getNewSize(tmpValues.length);
                 tmpValues = Arrays.copyOf(tmpValues, newSize);
