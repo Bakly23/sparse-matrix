@@ -164,7 +164,7 @@ public class SparseMatrix {
         private int numberOfNotNullElementsInCurrentRow = 0;
         private int indexOfTriplet = 0;
 
-        public SparseMatrixCreator() {
+        SparseMatrixCreator() {
             tmpIArray = new int[numberOfRows + 1];
             tmpJArray = new int[DEFAULT_SIZE];
             tmpValues = new int[DEFAULT_SIZE];
@@ -186,12 +186,8 @@ public class SparseMatrix {
 
         private void putMatrixElementIntoMatrix(Integer value) {
             if (currentColumn == numberOfColumns) {
-                if (numberOfNotNullElementsInCurrentRow == 0) {
-                    tmpIArray[currentRow + 1] = tmpIArray[currentRow];
-                } else {
-                    tmpIArray[currentRow + 1] = tmpIArray[currentRow] + numberOfNotNullElementsInCurrentRow;
-                    numberOfNotNullElementsInCurrentRow = 0;
-                }
+                tmpIArray[currentRow + 1] = tmpIArray[currentRow] + numberOfNotNullElementsInCurrentRow;
+                numberOfNotNullElementsInCurrentRow = 0;
                 currentRow++;
                 currentColumn = 0;
             }
@@ -206,6 +202,9 @@ public class SparseMatrix {
         }
 
         private void assureCapacity() {
+            /*if(tmpIArray == null) {
+                tmpIArray = new int[numberOfRows + 1];
+            }*/
             if (indexOfTriplet + 1 == tmpValues.length) {
                 int newSize = getNewSize(tmpValues.length);
                 tmpValues = Arrays.copyOf(tmpValues, newSize);
@@ -233,7 +232,7 @@ public class SparseMatrix {
         private int numberOfElementsInCurrentRow = 0;
         private int indexOfTriplet = 0;
 
-        public MultiplySparseMatrixCreator(int numberOfRows) {
+        MultiplySparseMatrixCreator(int numberOfRows) {
             tmpIArray = new int[numberOfRows + 1];
             tmpJArray = new int[DEFAULT_SIZE];
             tmpValues = new int[DEFAULT_SIZE];
